@@ -6,7 +6,7 @@ import { useApp } from '@/contexts/AppContext';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Activity, ActivityStatus } from '@/types/app';
-import { generateId, createActivityHistoryEntry } from '@/utils';
+import { generateId, createActivityHistoryEntry } from '@/utils/generators';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 
 export default function ActivityFormScreen() {
