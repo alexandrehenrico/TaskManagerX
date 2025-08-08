@@ -137,31 +137,7 @@ export default function SettingsScreen() {
               </Card>
             </>
           )}
-        </View>
-
-        {/* Danger Zone */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Zona de Perigo</Text>
-          <Card style={[styles.card, styles.dangerCard]}>
-            <View style={styles.dangerContent}>
-              <View style={styles.dangerInfo}>
-                <Trash2 size={20} color="#DC2626" />
-                <View>
-                  <Text style={styles.dangerTitle}>Limpar Todos os Dados</Text>
-                  <Text style={styles.dangerDescription}>
-                    Remove permanentemente todos os dados do app
-                  </Text>
-                </View>
-              </View>
-              <Button
-                title="Limpar"
-                onPress={confirmClearData}
-                variant="danger"
-                size="small"
-              />
-            </View>
-          </Card>
-        </View>
+        </View>>
       </ScrollView>
     </SafeAreaView>
   );
