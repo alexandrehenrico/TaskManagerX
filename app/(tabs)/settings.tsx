@@ -137,7 +137,7 @@ export default function SettingsScreen() {
               </Card>
             </>
           )}
-        </View>>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
