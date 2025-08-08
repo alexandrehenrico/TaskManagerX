@@ -234,6 +234,14 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     fontWeight: '500',
   },
+  warningCard: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#D97706',
+  },
+  dangerCard: {
+    borderLeftWidth: 4,
+    borderLeftColor: '#DC2626',
+  },
   section: {
     padding: 16,
   },
