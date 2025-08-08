@@ -2,7 +2,8 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { Company, Person, Activity, AppSettings, ActivityStatus } from '@/types/app';
 import { StorageService } from '@/services/storage';
 import { NotificationService } from '@/services/notifications';
-import { isOverdue, createActivityHistoryEntry } from '@/utils';
+import { isOverdue } from '@/utils/dateUtils';
+import { createActivityHistoryEntry } from '@/utils/generators';
 
 interface AppContextType {
   // State
