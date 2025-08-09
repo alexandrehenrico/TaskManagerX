@@ -16,15 +16,20 @@ export class NotificationService {
       return true; // Web doesn't require notification permissions for our use case
     }
 
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
+    try {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
 
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+
+      return finalStatus === 'granted';
+    } catch (error) {
+      console.error('Error requesting notification permissions:', error);
+      return false;
     }
-
-    return finalStatus === 'granted';
   }
 
   static async scheduleActivityReminder(

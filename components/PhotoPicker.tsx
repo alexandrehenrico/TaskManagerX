@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera, User } from 'lucide-react-native';
 

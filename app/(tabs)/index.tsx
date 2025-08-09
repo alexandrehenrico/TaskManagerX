@@ -38,7 +38,7 @@ export default function Dashboard() {
 
   // Redirect to setup if not initialized
   useEffect(() => {
-    if (!loading && !settings.initialized) {
+    if (!loading && !settings.initialized && settings.company === undefined) {
       router.replace('/setup/company');
     }
   }, [loading, settings.initialized]);
