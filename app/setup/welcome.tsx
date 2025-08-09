@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Building2, Users, CheckSquare, ArrowRight } from 'lucide-react-native';
+import { Building2, Users, SquareCheck as CheckSquare, ArrowRight } from 'lucide-react-native';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { useRouter } from 'expo-router';
