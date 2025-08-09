@@ -11,7 +11,7 @@ import { generateId } from '@/utils/generators';
 import { useRouter } from 'expo-router';
 
 export default function CompanySetupScreen() {
-  const { saveCompany } = useApp();
+  const { saveCompany, updateSettings, settings } = useApp();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -45,6 +45,14 @@ export default function CompanySetupScreen() {
       };
 
       await saveCompany(company);
+      
+      // Mark as initialized
+      const updatedSettings = {
+        ...settings,
+        initialized: true,
+      };
+      await updateSettings(updatedSettings);
+      
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Error saving company:', error);
@@ -56,8 +64,25 @@ export default function CompanySetupScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Button
+          title="Pular"
+          onPress={async () => {
+            const updatedSettings = {
+              ...settings,
+              initialized: true,
+            };
+            await updateSettings(updatedSettings);
+            router.replace('/(tabs)');
+          }}
+          variant="secondary"
+          size="small"
+        />
+        <View style={styles.placeholder} />
+      </View>
+
       <ScrollView style={styles.scrollView}>
-        <View style={styles.header}>
+        <View style={styles.welcomeHeader}>
           <Building2 size={32} color="#2563EB" />
           <Text style={styles.title}>Configuração Inicial</Text>
           <Text style={styles.subtitle}>
@@ -154,6 +179,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    paddingTop: 8,
+  },
+  placeholder: {
+    width: 60,
+  },
+  welcomeHeader: {
     alignItems: 'center',
     padding: 24,
     paddingTop: 32,
