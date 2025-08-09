@@ -72,12 +72,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   // Load initial data
   useEffect(() => {
-    // Small delay to show splash screen
-    const timer = setTimeout(() => {
-      loadInitialData();
-    }, 1000);
-    
-    return () => clearTimeout(timer);
+    loadInitialData();
   }, []);
 
   // Check for overdue activities periodically

@@ -38,9 +38,7 @@ export default function Dashboard() {
 
   // Redirect to setup if not initialized
   useEffect(() => {
-    if (!loading && !settings.initialized) {
-      router.replace('/splash');
-    }
+    // No automatic redirect - splash screen handles navigation
   }, [loading, settings.initialized]);
 
   if (loading) {

@@ -14,8 +14,8 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="splash" options={{ headerShown: false }} />
           <Stack.Screen name="setup/welcome" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="setup/company" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="forms/person" options={{ headerShown: false }} />
           <Stack.Screen name="forms/activity" options={{ headerShown: false }} />
           <Stack.Screen name="forms/company" options={{ headerShown: false }} />

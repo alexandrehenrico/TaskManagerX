@@ -28,17 +28,15 @@ export default function SplashScreen() {
 
     // Navigate after splash duration
     const timer = setTimeout(() => {
-      if (!loading) {
-        if (settings.initialized) {
-          router.replace('/(tabs)');
-        } else {
-          router.replace('/setup/welcome');
-        }
+      if (settings.initialized) {
+        router.replace('/(tabs)');
+      } else {
+        router.replace('/setup/welcome');
       }
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, [loading, settings.initialized]);
+  }, [settings.initialized]);
 
   return (
     <SafeAreaView style={styles.container}>
