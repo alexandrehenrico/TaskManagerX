@@ -74,6 +74,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   // Check for overdue activities periodically
   useEffect(() => {
+    if (activities.length === 0) return;
+    
     const interval = setInterval(checkOverdueActivities, 60000); // Check every minute
     return () => clearInterval(interval);
   }, [activities]);
