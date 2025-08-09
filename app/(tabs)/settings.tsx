@@ -5,12 +5,14 @@ import { Building2, Bell, Trash2, User } from 'lucide-react-native';
 import { useApp } from '@/contexts/AppContext';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { ConfirmationModal } from '@/components/ui/ConfirmationModal';
 import { useRouter } from 'expo-router';
 
 export default function SettingsScreen() {
-  const { company, settings, updateSettings } = useApp();
+  const { company, settings, updateSettings, clearAllData } = useApp();
   const router = useRouter();
   const [localSettings, setLocalSettings] = useState(settings);
+  const [showClearDataModal, setShowClearDataModal] = useState(false);
 
   const updateNotificationSetting = async (key: string, value: any) => {
     const updatedSettings = {
@@ -24,22 +26,23 @@ export default function SettingsScreen() {
     await updateSettings(updatedSettings);
   };
 
-  const confirmClearData = () => {
-    Alert.alert(
-      'Limpar Todos os Dados',
-      'Esta ação não pode ser desfeita. Todos os dados serão removidos permanentemente.',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        { 
-          text: 'Limpar', 
-          style: 'destructive', 
-          onPress: () => {
-            // For now, just show message - actual implementation would clear storage
-            Alert.alert('Funcionalidade em desenvolvimento', 'Em breve você poderá limpar todos os dados.');
-          }
-        },
-      ]
-    );
+  const handleClearData = async () => {
+    try {
+      await clearAllData();
+      setShowClearDataModal(false);
+      Alert.alert(
+        'Dados Limpos',
+        'Todos os dados foram removidos com sucesso.',
+        [
+          {
+            text: 'OK',
+            onPress: () => router.replace('/splash'),
+          },
+        ]
+      );
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível limpar os dados.');
+    }
   };
 
   return (
@@ -138,7 +141,41 @@ export default function SettingsScreen() {
             </>
           )}
         </View>
+
+        {/* Danger Zone */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Zona de Perigo</Text>
+          <Card style={[styles.card, styles.dangerCard]}>
+            <View style={styles.dangerContent}>
+              <View style={styles.dangerInfo}>
+                <Trash2 size={20} color="#DC2626" />
+                <View>
+                  <Text style={styles.dangerTitle}>Limpar Todos os Dados</Text>
+                  <Text style={styles.dangerDescription}>
+                    Remove permanentemente todos os dados do aplicativo
+                  </Text>
+                </View>
+              </View>
+              <Button
+                title="Limpar"
+                onPress={() => setShowClearDataModal(true)}
+                variant="danger"
+                size="small"
+              />
+            </View>
+          </Card>
+        </View>
       </ScrollView>
+
+      <ConfirmationModal
+        visible={showClearDataModal}
+        title="Limpar Todos os Dados"
+        message="Esta ação não pode ser desfeita. Todos os dados da empresa, pessoas e atividades serão removidos permanentemente do aplicativo."
+        confirmText="limpar dados"
+        onConfirm={handleClearData}
+        onCancel={() => setShowClearDataModal(false)}
+        destructive
+      />
     </SafeAreaView>
   );
 }

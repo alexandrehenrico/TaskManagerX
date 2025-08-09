@@ -180,4 +180,12 @@ export class NotificationService {
       console.error('Error canceling activity notifications:', error);
     }
   }
+
+  static async cancelAllNotifications(): Promise<void> {
+    try {
+      await Notifications.cancelAllScheduledNotificationsAsync();
+    } catch (error) {
+      console.error('Error canceling all notifications:', error);
+    }
+  }
 }

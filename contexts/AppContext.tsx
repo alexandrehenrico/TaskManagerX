@@ -31,6 +31,9 @@ interface AppContextType {
   // Settings methods
   updateSettings: (settings: AppSettings) => Promise<void>;
 
+  // Data management methods
+  clearAllData: () => Promise<void>;
+
   // Utility methods
   refreshData: () => Promise<void>;
   getActivitiesByPerson: (personId: string) => Activity[];
@@ -272,6 +275,33 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   };
 
+  const clearAllData = async () => {
+    try {
+      // Clear storage
+      await StorageService.clearAllData();
+      
+      // Cancel all notifications
+      await NotificationService.cancelAllNotifications();
+      
+      // Reset state
+      setCompany(null);
+      setPeople([]);
+      setActivities([]);
+      setSettings({
+        notifications: {
+          enabled: true,
+          dailySummaryTime: '08:00',
+          soundEnabled: true,
+          reminderBeforeDays: 1,
+        },
+        initialized: false,
+      });
+    } catch (error) {
+      console.error('Error clearing all data:', error);
+      throw error;
+    }
+  };
+
   const refreshData = async () => {
     await loadInitialData();
   };
@@ -321,6 +351,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     deleteActivity,
     updateActivityStatus,
     updateSettings,
+    clearAllData,
     refreshData,
     getActivitiesByPerson,
     getOverdueActivities,
