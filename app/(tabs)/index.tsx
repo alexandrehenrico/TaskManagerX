@@ -66,8 +66,8 @@ export default function Dashboard() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Bom dia!</Text>
-            <Text style={styles.companyName}>{company?.name}</Text>
+            <Text style={styles.greeting}>Olá,</Text>
+            <Text style={styles.companyName}>{company?.name}!</Text>
           </View>
         </View>
 
