@@ -33,7 +33,7 @@ export default function SplashScreen() {
       } else {
         router.replace('/setup/welcome');
       }
-    }, 2500);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, [settings.initialized]);
